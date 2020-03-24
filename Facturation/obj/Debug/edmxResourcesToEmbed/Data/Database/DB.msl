@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Facturation_DBModelStoreContainer" CdmEntityContainer="Facturation_DBEntities">
+    <EntitySetMapping Name="APPELs">
+      <EntityTypeMapping TypeName="Facturation_DBModel.APPEL">
+        <MappingFragment StoreEntitySet="APPEL">
+          <ScalarProperty Name="IdAppel" ColumnName="IdAppel" />
+          <ScalarProperty Name="DateEtHeurAppel" ColumnName="DateEtHeurAppel" />
+          <ScalarProperty Name="IdClient_" ColumnName="IdClient#" />
+          <ScalarProperty Name="DescriptionAppel" ColumnName="DescriptionAppel" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CLIENTs">
+      <EntityTypeMapping TypeName="Facturation_DBModel.CLIENT">
+        <MappingFragment StoreEntitySet="CLIENT">
+          <ScalarProperty Name="NumeroSerie" ColumnName="NumeroSerie" />
+          <ScalarProperty Name="NumeroTelephoneClient" ColumnName="NumeroTelephoneClient" />
+          <ScalarProperty Name="NomAgenceOuClient" ColumnName="NomAgenceOuClient" />
+          <ScalarProperty Name="Id_Class_" ColumnName="Id_Class#" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CODE_ERREUR">
+      <EntityTypeMapping TypeName="Facturation_DBModel.CODE_ERREUR">
+        <MappingFragment StoreEntitySet="CODE_ERREUR">
+          <ScalarProperty Name="IdErreur" ColumnName="IdErreur" />
+          <ScalarProperty Name="LblErreur" ColumnName="LblErreur" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CODE_REPARATION">
+      <EntityTypeMapping TypeName="Facturation_DBModel.CODE_REPARATION">
+        <MappingFragment StoreEntitySet="CODE_REPARATION">
+          <ScalarProperty Name="IdCodeReparation" ColumnName="IdCodeReparation" />
+          <ScalarProperty Name="LblReparation" ColumnName="LblReparation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FACTURATIONs">
+      <EntityTypeMapping TypeName="Facturation_DBModel.FACTURATION">
+        <MappingFragment StoreEntitySet="FACTURATION">
+          <ScalarProperty Name="IdFacture" ColumnName="IdFacture" />
+          <ScalarProperty Name="IdReparation_" ColumnName="IdReparation#" />
+          <ScalarProperty Name="IdAppel_" ColumnName="IdAppel#" />
+          <ScalarProperty Name="EstImprime" ColumnName="EstImprime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INGENIEURs">
+      <EntityTypeMapping TypeName="Facturation_DBModel.INGENIEUR">
+        <MappingFragment StoreEntitySet="INGENIEUR">
+          <ScalarProperty Name="IdIngenieur" ColumnName="IdIngenieur" />
+          <ScalarProperty Name="NumeroTelephoneIngenieur" ColumnName="NumeroTelephoneIngenieur" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PIECEs">
+      <EntityTypeMapping TypeName="Facturation_DBModel.PIECE">
+        <MappingFragment StoreEntitySet="PIECE">
+          <ScalarProperty Name="RefPiece" ColumnName="RefPiece" />
+          <ScalarProperty Name="LblPiece" ColumnName="LblPiece" />
+          <ScalarProperty Name="Prix" ColumnName="Prix" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="REPARATIONs">
+      <EntityTypeMapping TypeName="Facturation_DBModel.REPARATION">
+        <MappingFragment StoreEntitySet="REPARATION">
+          <ScalarProperty Name="IdReparation" ColumnName="IdReparation" />
+          <ScalarProperty Name="DateEtHeurDepartIngenieur" ColumnName="DateEtHeurDepartIngenieur" />
+          <ScalarProperty Name="DateEtHeurArriveIngenieur" ColumnName="DateEtHeurArriveIngenieur" />
+          <ScalarProperty Name="DateEtHeurDebutService" ColumnName="DateEtHeurDebutService" />
+          <ScalarProperty Name="DateEtHeurFinService" ColumnName="DateEtHeurFinService" />
+          <ScalarProperty Name="TempsPause" ColumnName="TempsPause" />
+          <ScalarProperty Name="HeurePause" ColumnName="HeurePause" />
+          <ScalarProperty Name="DescriptionTravaux" ColumnName="DescriptionTravaux" />
+          <ScalarProperty Name="IdIngenieur_" ColumnName="IdIngenieur#" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TYPE_APPEL">
+      <EntityTypeMapping TypeName="Facturation_DBModel.TYPE_APPEL">
+        <MappingFragment StoreEntitySet="TYPE_APPEL">
+          <ScalarProperty Name="IdTypeAppel" ColumnName="IdTypeAppel" />
+          <ScalarProperty Name="LblTypeAppel" ColumnName="LblTypeAppel" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VILLEs">
+      <EntityTypeMapping TypeName="Facturation_DBModel.VILLE">
+        <MappingFragment StoreEntitySet="VILLE">
+          <ScalarProperty Name="IdVille" ColumnName="IdVille" />
+          <ScalarProperty Name="LblVille" ColumnName="LblVille" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="JOIN_APPEL_TYPEAPPEL" TypeName="Facturation_DBModel.JOIN_APPEL_TYPEAPPEL" StoreEntitySet="JOIN_APPEL_TYPEAPPEL">
+      <EndProperty Name="APPEL">
+        <ScalarProperty Name="IdAppel" ColumnName="IdAppel#" />
+      </EndProperty>
+      <EndProperty Name="TYPE_APPEL">
+        <ScalarProperty Name="IdTypeAppel" ColumnName="IdTypeAppel#" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="JOIN_FACTURATION_CODEERREUR" TypeName="Facturation_DBModel.JOIN_FACTURATION_CODEERREUR" StoreEntitySet="JOIN_FACTURATION_CODEERREUR">
+      <EndProperty Name="CODE_ERREUR">
+        <ScalarProperty Name="IdErreur" ColumnName="IdErreur#" />
+      </EndProperty>
+      <EndProperty Name="FACTURATION">
+        <ScalarProperty Name="IdFacture" ColumnName="IdFacture#" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="JOIN_REPARATION_CODEREPARATION" TypeName="Facturation_DBModel.JOIN_REPARATION_CODEREPARATION" StoreEntitySet="JOIN_REPARATION_CODEREPARATION">
+      <EndProperty Name="CODE_REPARATION">
+        <ScalarProperty Name="IdCodeReparation" ColumnName="IdCodeReparation#" />
+      </EndProperty>
+      <EndProperty Name="REPARATION">
+        <ScalarProperty Name="IdReparation" ColumnName="IdReparation#" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="JOIN_REPARATION_PIECE" TypeName="Facturation_DBModel.JOIN_REPARATION_PIECE" StoreEntitySet="JOIN_REPARATION_PIECE">
+      <EndProperty Name="REPARATION">
+        <ScalarProperty Name="IdReparation" ColumnName="IdReparation#" />
+      </EndProperty>
+      <EndProperty Name="PIECE">
+        <ScalarProperty Name="RefPiece" ColumnName="RefPiece#" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

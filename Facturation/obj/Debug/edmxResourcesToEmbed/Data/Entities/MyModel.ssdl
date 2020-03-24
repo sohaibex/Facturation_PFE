@@ -1,0 +1,367 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Facturation_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ADMINN">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="nom" Type="varchar" MaxLength="20" />
+    <Property Name="prenom" Type="varchar" MaxLength="20" />
+    <Property Name="email" Type="varchar" MaxLength="20" />
+    <Property Name="mdp" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="APPEL">
+    <Key>
+      <PropertyRef Name="IdAppel" />
+    </Key>
+    <Property Name="IdAppel" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DateEtHeurAppel" Type="datetime" />
+    <Property Name="IdClient#" Type="varchar" MaxLength="20" />
+    <Property Name="DescriptionAppel" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="CLIENT">
+    <Key>
+      <PropertyRef Name="NumeroSerie" />
+    </Key>
+    <Property Name="NumeroSerie" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="NumeroTelephoneClient" Type="varchar" MaxLength="20" />
+    <Property Name="NomAgenceOuClient" Type="varchar" MaxLength="50" />
+    <Property Name="Id_Class#" Type="int" />
+  </EntityType>
+  <EntityType Name="CODE_ERREUR">
+    <Key>
+      <PropertyRef Name="IdErreur" />
+    </Key>
+    <Property Name="IdErreur" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="LblErreur" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="CODE_REPARATION">
+    <Key>
+      <PropertyRef Name="IdCodeReparation" />
+    </Key>
+    <Property Name="IdCodeReparation" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="LblReparation" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="FACTURATION">
+    <Key>
+      <PropertyRef Name="IdFacture" />
+    </Key>
+    <Property Name="IdFacture" Type="int" Nullable="false" />
+    <Property Name="IdReparation#" Type="int" />
+    <Property Name="IdAppel#" Type="int" />
+    <Property Name="EstImprime" Type="bit" />
+  </EntityType>
+  <EntityType Name="INGENIEUR">
+    <Key>
+      <PropertyRef Name="IdIngenieur" />
+    </Key>
+    <Property Name="IdIngenieur" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="noming" Type="varchar" MaxLength="20" />
+    <Property Name="prenom" Type="varchar" MaxLength="20" />
+    <Property Name="NumeroTelephoneIngenieur" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="JOIN_APPEL_TYPEAPPEL">
+    <Key>
+      <PropertyRef Name="IdAppel#" />
+      <PropertyRef Name="IdTypeAppel#" />
+    </Key>
+    <Property Name="IdAppel#" Type="int" Nullable="false" />
+    <Property Name="IdTypeAppel#" Type="varchar" MaxLength="4" Nullable="false" />
+  </EntityType>
+  <EntityType Name="JOIN_FACTURATION_CODEERREUR">
+    <Key>
+      <PropertyRef Name="IdFacture#" />
+      <PropertyRef Name="IdErreur#" />
+    </Key>
+    <Property Name="IdFacture#" Type="int" Nullable="false" />
+    <Property Name="IdErreur#" Type="varchar" MaxLength="4" Nullable="false" />
+  </EntityType>
+  <EntityType Name="JOIN_REPARATION_CODEREPARATION">
+    <Key>
+      <PropertyRef Name="IdReparation#" />
+      <PropertyRef Name="IdCodeReparation#" />
+    </Key>
+    <Property Name="IdReparation#" Type="int" Nullable="false" />
+    <Property Name="IdCodeReparation#" Type="varchar" MaxLength="4" Nullable="false" />
+  </EntityType>
+  <EntityType Name="JOIN_REPARATION_PIECE">
+    <Key>
+      <PropertyRef Name="RefPiece#" />
+      <PropertyRef Name="IdReparation#" />
+    </Key>
+    <Property Name="RefPiece#" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="IdReparation#" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PIECE">
+    <Key>
+      <PropertyRef Name="RefPiece" />
+    </Key>
+    <Property Name="RefPiece" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="LblPiece" Type="varchar" MaxLength="50" />
+    <Property Name="Prix" Type="float" />
+  </EntityType>
+  <EntityType Name="REPARATION">
+    <Key>
+      <PropertyRef Name="IdReparation" />
+    </Key>
+    <Property Name="IdReparation" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DateEtHeurDepartIngenieur" Type="datetime" />
+    <Property Name="DateEtHeurArriveIngenieur" Type="datetime" />
+    <Property Name="DateEtHeurDebutService" Type="datetime" />
+    <Property Name="DateEtHeurFinService" Type="datetime" />
+    <Property Name="TempsPause" Type="int" />
+    <Property Name="HeurePause" Type="time" Precision="7" />
+    <Property Name="DescriptionTravaux" Type="varchar" MaxLength="1000" />
+    <Property Name="IdIngenieur#" Type="int" />
+  </EntityType>
+  <EntityType Name="SECRETAIRE">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="nom" Type="varchar" MaxLength="20" />
+    <Property Name="prenom" Type="varchar" MaxLength="20" />
+    <Property Name="email" Type="varchar" MaxLength="20" />
+    <Property Name="mdp" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="TYPE_APPEL">
+    <Key>
+      <PropertyRef Name="IdTypeAppel" />
+    </Key>
+    <Property Name="IdTypeAppel" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="LblTypeAppel" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="VILLE">
+    <Key>
+      <PropertyRef Name="IdVille" />
+    </Key>
+    <Property Name="IdVille" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LblVille" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK__APPEL__IdClient#__34C8D9D1">
+    <End Role="CLIENT" Type="Self.CLIENT" Multiplicity="0..1" />
+    <End Role="APPEL" Type="Self.APPEL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CLIENT">
+        <PropertyRef Name="NumeroSerie" />
+      </Principal>
+      <Dependent Role="APPEL">
+        <PropertyRef Name="IdClient#" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CLIENT__Id_Class__2A4B4B5E">
+    <End Role="VILLE" Type="Self.VILLE" Multiplicity="0..1" />
+    <End Role="CLIENT" Type="Self.CLIENT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VILLE">
+        <PropertyRef Name="IdVille" />
+      </Principal>
+      <Dependent Role="CLIENT">
+        <PropertyRef Name="Id_Class#" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FACTURATI__IdApp__4222D4EF">
+    <End Role="APPEL" Type="Self.APPEL" Multiplicity="0..1" />
+    <End Role="FACTURATION" Type="Self.FACTURATION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="APPEL">
+        <PropertyRef Name="IdAppel" />
+      </Principal>
+      <Dependent Role="FACTURATION">
+        <PropertyRef Name="IdAppel#" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FACTURATI__IdRep__412EB0B6">
+    <End Role="REPARATION" Type="Self.REPARATION" Multiplicity="0..1" />
+    <End Role="FACTURATION" Type="Self.FACTURATION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="REPARATION">
+        <PropertyRef Name="IdReparation" />
+      </Principal>
+      <Dependent Role="FACTURATION">
+        <PropertyRef Name="IdReparation#" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__JOIN_APPE__IdApp__37A5467C">
+    <End Role="APPEL" Type="Self.APPEL" Multiplicity="1" />
+    <End Role="JOIN_APPEL_TYPEAPPEL" Type="Self.JOIN_APPEL_TYPEAPPEL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="APPEL">
+        <PropertyRef Name="IdAppel" />
+      </Principal>
+      <Dependent Role="JOIN_APPEL_TYPEAPPEL">
+        <PropertyRef Name="IdAppel#" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__JOIN_APPE__IdTyp__38996AB5">
+    <End Role="TYPE_APPEL" Type="Self.TYPE_APPEL" Multiplicity="1" />
+    <End Role="JOIN_APPEL_TYPEAPPEL" Type="Self.JOIN_APPEL_TYPEAPPEL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TYPE_APPEL">
+        <PropertyRef Name="IdTypeAppel" />
+      </Principal>
+      <Dependent Role="JOIN_APPEL_TYPEAPPEL">
+        <PropertyRef Name="IdTypeAppel#" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__JOIN_FACT__IdErr__45F365D3">
+    <End Role="CODE_ERREUR" Type="Self.CODE_ERREUR" Multiplicity="1" />
+    <End Role="JOIN_FACTURATION_CODEERREUR" Type="Self.JOIN_FACTURATION_CODEERREUR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CODE_ERREUR">
+        <PropertyRef Name="IdErreur" />
+      </Principal>
+      <Dependent Role="JOIN_FACTURATION_CODEERREUR">
+        <PropertyRef Name="IdErreur#" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__JOIN_FACT__IdFac__44FF419A">
+    <End Role="FACTURATION" Type="Self.FACTURATION" Multiplicity="1" />
+    <End Role="JOIN_FACTURATION_CODEERREUR" Type="Self.JOIN_FACTURATION_CODEERREUR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FACTURATION">
+        <PropertyRef Name="IdFacture" />
+      </Principal>
+      <Dependent Role="JOIN_FACTURATION_CODEERREUR">
+        <PropertyRef Name="IdFacture#" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__JOIN_REPA__IdCod__49C3F6B7">
+    <End Role="CODE_REPARATION" Type="Self.CODE_REPARATION" Multiplicity="1" />
+    <End Role="JOIN_REPARATION_CODEREPARATION" Type="Self.JOIN_REPARATION_CODEREPARATION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CODE_REPARATION">
+        <PropertyRef Name="IdCodeReparation" />
+      </Principal>
+      <Dependent Role="JOIN_REPARATION_CODEREPARATION">
+        <PropertyRef Name="IdCodeReparation#" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__JOIN_REPA__IdRep__48CFD27E">
+    <End Role="REPARATION" Type="Self.REPARATION" Multiplicity="1" />
+    <End Role="JOIN_REPARATION_CODEREPARATION" Type="Self.JOIN_REPARATION_CODEREPARATION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="REPARATION">
+        <PropertyRef Name="IdReparation" />
+      </Principal>
+      <Dependent Role="JOIN_REPARATION_CODEREPARATION">
+        <PropertyRef Name="IdReparation#" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__JOIN_REPA__IdRep__4D94879B">
+    <End Role="REPARATION" Type="Self.REPARATION" Multiplicity="1" />
+    <End Role="JOIN_REPARATION_PIECE" Type="Self.JOIN_REPARATION_PIECE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="REPARATION">
+        <PropertyRef Name="IdReparation" />
+      </Principal>
+      <Dependent Role="JOIN_REPARATION_PIECE">
+        <PropertyRef Name="IdReparation#" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__JOIN_REPA__RefPi__4CA06362">
+    <End Role="PIECE" Type="Self.PIECE" Multiplicity="1" />
+    <End Role="JOIN_REPARATION_PIECE" Type="Self.JOIN_REPARATION_PIECE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PIECE">
+        <PropertyRef Name="RefPiece" />
+      </Principal>
+      <Dependent Role="JOIN_REPARATION_PIECE">
+        <PropertyRef Name="RefPiece#" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__REPARATIO__IdIng__3E52440B">
+    <End Role="INGENIEUR" Type="Self.INGENIEUR" Multiplicity="0..1" />
+    <End Role="REPARATION" Type="Self.REPARATION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INGENIEUR">
+        <PropertyRef Name="IdIngenieur" />
+      </Principal>
+      <Dependent Role="REPARATION">
+        <PropertyRef Name="IdIngenieur#" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Facturation_DBModelStoreContainer">
+    <EntitySet Name="ADMINN" EntityType="Self.ADMINN" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="APPEL" EntityType="Self.APPEL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CLIENT" EntityType="Self.CLIENT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CODE_ERREUR" EntityType="Self.CODE_ERREUR" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CODE_REPARATION" EntityType="Self.CODE_REPARATION" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FACTURATION" EntityType="Self.FACTURATION" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="INGENIEUR" EntityType="Self.INGENIEUR" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="JOIN_APPEL_TYPEAPPEL" EntityType="Self.JOIN_APPEL_TYPEAPPEL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="JOIN_FACTURATION_CODEERREUR" EntityType="Self.JOIN_FACTURATION_CODEERREUR" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="JOIN_REPARATION_CODEREPARATION" EntityType="Self.JOIN_REPARATION_CODEREPARATION" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="JOIN_REPARATION_PIECE" EntityType="Self.JOIN_REPARATION_PIECE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PIECE" EntityType="Self.PIECE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="REPARATION" EntityType="Self.REPARATION" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SECRETAIRE" EntityType="Self.SECRETAIRE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TYPE_APPEL" EntityType="Self.TYPE_APPEL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VILLE" EntityType="Self.VILLE" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__APPEL__IdClient#__34C8D9D1" Association="Self.FK__APPEL__IdClient#__34C8D9D1">
+      <End Role="CLIENT" EntitySet="CLIENT" />
+      <End Role="APPEL" EntitySet="APPEL" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CLIENT__Id_Class__2A4B4B5E" Association="Self.FK__CLIENT__Id_Class__2A4B4B5E">
+      <End Role="VILLE" EntitySet="VILLE" />
+      <End Role="CLIENT" EntitySet="CLIENT" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FACTURATI__IdApp__4222D4EF" Association="Self.FK__FACTURATI__IdApp__4222D4EF">
+      <End Role="APPEL" EntitySet="APPEL" />
+      <End Role="FACTURATION" EntitySet="FACTURATION" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FACTURATI__IdRep__412EB0B6" Association="Self.FK__FACTURATI__IdRep__412EB0B6">
+      <End Role="REPARATION" EntitySet="REPARATION" />
+      <End Role="FACTURATION" EntitySet="FACTURATION" />
+    </AssociationSet>
+    <AssociationSet Name="FK__JOIN_APPE__IdApp__37A5467C" Association="Self.FK__JOIN_APPE__IdApp__37A5467C">
+      <End Role="APPEL" EntitySet="APPEL" />
+      <End Role="JOIN_APPEL_TYPEAPPEL" EntitySet="JOIN_APPEL_TYPEAPPEL" />
+    </AssociationSet>
+    <AssociationSet Name="FK__JOIN_APPE__IdTyp__38996AB5" Association="Self.FK__JOIN_APPE__IdTyp__38996AB5">
+      <End Role="TYPE_APPEL" EntitySet="TYPE_APPEL" />
+      <End Role="JOIN_APPEL_TYPEAPPEL" EntitySet="JOIN_APPEL_TYPEAPPEL" />
+    </AssociationSet>
+    <AssociationSet Name="FK__JOIN_FACT__IdErr__45F365D3" Association="Self.FK__JOIN_FACT__IdErr__45F365D3">
+      <End Role="CODE_ERREUR" EntitySet="CODE_ERREUR" />
+      <End Role="JOIN_FACTURATION_CODEERREUR" EntitySet="JOIN_FACTURATION_CODEERREUR" />
+    </AssociationSet>
+    <AssociationSet Name="FK__JOIN_FACT__IdFac__44FF419A" Association="Self.FK__JOIN_FACT__IdFac__44FF419A">
+      <End Role="FACTURATION" EntitySet="FACTURATION" />
+      <End Role="JOIN_FACTURATION_CODEERREUR" EntitySet="JOIN_FACTURATION_CODEERREUR" />
+    </AssociationSet>
+    <AssociationSet Name="FK__JOIN_REPA__IdCod__49C3F6B7" Association="Self.FK__JOIN_REPA__IdCod__49C3F6B7">
+      <End Role="CODE_REPARATION" EntitySet="CODE_REPARATION" />
+      <End Role="JOIN_REPARATION_CODEREPARATION" EntitySet="JOIN_REPARATION_CODEREPARATION" />
+    </AssociationSet>
+    <AssociationSet Name="FK__JOIN_REPA__IdRep__48CFD27E" Association="Self.FK__JOIN_REPA__IdRep__48CFD27E">
+      <End Role="REPARATION" EntitySet="REPARATION" />
+      <End Role="JOIN_REPARATION_CODEREPARATION" EntitySet="JOIN_REPARATION_CODEREPARATION" />
+    </AssociationSet>
+    <AssociationSet Name="FK__JOIN_REPA__IdRep__4D94879B" Association="Self.FK__JOIN_REPA__IdRep__4D94879B">
+      <End Role="REPARATION" EntitySet="REPARATION" />
+      <End Role="JOIN_REPARATION_PIECE" EntitySet="JOIN_REPARATION_PIECE" />
+    </AssociationSet>
+    <AssociationSet Name="FK__JOIN_REPA__RefPi__4CA06362" Association="Self.FK__JOIN_REPA__RefPi__4CA06362">
+      <End Role="PIECE" EntitySet="PIECE" />
+      <End Role="JOIN_REPARATION_PIECE" EntitySet="JOIN_REPARATION_PIECE" />
+    </AssociationSet>
+    <AssociationSet Name="FK__REPARATIO__IdIng__3E52440B" Association="Self.FK__REPARATIO__IdIng__3E52440B">
+      <End Role="INGENIEUR" EntitySet="INGENIEUR" />
+      <End Role="REPARATION" EntitySet="REPARATION" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
